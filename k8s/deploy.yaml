@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-apps
+  labels:
+    app: python-apps
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: python-apps
+  template:
+    metadata:
+      labels:
+        app: python-apps
+    spec:
+      containers:
+      - name: python-apps
+        image: niketjoshi/python-apps:v5
+        ports:
+        - containerPort: 5000

@@ -1,0 +1,38 @@
+## Corrected values-argocd.yaml for Kind Local Development
+
+global:
+  domain: argocd.test.com
+
+# 1. Disable HA/Multi-replica to save memory on your MacBook Air
+redis-ha:
+  enabled: false
+
+controller:
+  replicas: 1
+
+repoServer:
+  replicas: 1
+
+applicationSet:
+  replicas: 1
+
+server:
+  replicas: 1
+  # 2. Tell ArgoCD to allow non-HTTPS traffic internally so NGINX can talk to it
+  
+  ingress:
+    enabled: true
+    ingressClassName: "nginx"
+    annotations:
+      # Use HTTPS for the backend communication
+      nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+      # Disable forced SSL redirect to avoid "Infinite Loop" errors in Chrome
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+      # Increase buffer size for large SSO/Auth cookies
+      nginx.ingress.kubernetes.io/proxy-buffer-size: "128k"
+    
+    # 3. Explicitly define the host and path (Required by the Helm Chart)
+    hosts:
+      - argocd.test.com
+    paths:
+      - /
