@@ -41,7 +41,7 @@ jobs:
           add-apt-repository universe
           apt update
           apt install python3-pip
-          pip install yq
+          pip3 install yq
           yq -Yi '.image.tag = "${{ needs.ci.outputs.commit_id }}"' charts/python-apps/values.yaml
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
