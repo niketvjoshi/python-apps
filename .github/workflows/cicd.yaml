@@ -38,21 +38,22 @@ jobs:
         shell: bash
         run: |
           echo ${{ needs.ci.outputs.commit_id }}
-          sudo add-apt-repository universe
-          sudo apt update
-          sudo apt install python3-pip jq -y
-          sudo pip3 install yq
+          sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+          sudo chmod a+x /usr/local/bin/yq
           yq -Yi '.image.tag = "${{ needs.ci.outputs.commit_id }}"' charts/python-apps/values.yaml
+
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
         with:
           message: "Update image tag in values.yaml to ${{ needs.ci.outputs.commit_id }}"
+
       - name: Install argocd
         shell: bash
         run: |
           curl -ksSL -o argocd https://argocd-server.argocd/download/argocd-linux-arm64
           chmod +x argocd
           sudo mv ./argocd /usr/local/bin/argocd
+          
       - name: Sync ArgoCD application
         shell: bash
         run: |
