@@ -33,7 +33,7 @@ jobs:
       - name: Install argocd
         shell: bash
         run: |
-          curl -ksSL -o argocd https://argocd.test.com/download/argocd-linux-arm64
+          curl -ksSL -o argocd https://argocd-server.argocd/download/argocd-linux-arm64
           chmod +x argocd
           sudo mv ./argocd /usr/local/bin/argocd
       - name: Login to ArgoCD
