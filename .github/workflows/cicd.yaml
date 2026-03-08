@@ -39,7 +39,7 @@ jobs:
       - name: Sync ArgoCD application
         shell: bash
         run: |
-          argocd login https://argocd-server.argocd \
+          argocd login argocd-server.argocd.svc.cluster.local:443 \
             --insecure --grpc-web \
             --username admin \
             --password ${{ secrets.ARGOCD_PASSWORD }}
