@@ -38,10 +38,10 @@ jobs:
         shell: bash
         run: |
           echo ${{ needs.ci.outputs.commit_id }}
-          add-apt-repository universe
-          apt update
-          apt install python3-pip
-          pip3 install yq
+          sudo add-apt-repository universe
+          sudo apt update
+          sudo apt install python3-pip jq -y
+          sudo pip3 install yq
           yq -Yi '.image.tag = "${{ needs.ci.outputs.commit_id }}"' charts/python-apps/values.yaml
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
