@@ -33,11 +33,14 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Modify values file with new image tag
         shell: bash
         run: |
           echo ${{ needs.ci.outputs.commit_id }}
+          add-apt-repository universe
+          apt update
+          apt install python3-pip
           pip install yq
           yq -Yi '.image.tag = "${{ needs.ci.outputs.commit_id }}"' charts/python-apps/values.yaml
       - name: Commit changes
