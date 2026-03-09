@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: python-apps
+  description: A collection of Python applications for demo purposes
+  annotations:
+    github.com/project-slug: niketvjoshi/python-apps
+spec:
+  type: service
+  lifecycle: experimental
+  owner: development
+  
