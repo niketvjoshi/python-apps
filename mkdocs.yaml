@@ -1,0 +1,10 @@
+site_name: 'python-apps'
+site_description: 'Main documentation for python-apps features and framework APIs'
+repo_url: https://github.com/niketvjoshi/python-apps/
+edit_uri: edit/main/docs
+
+plugins:
+  - techdocs-core
+nav:
+  - Overview:
+      - Getting Started?: 'docs/index.md'
